@@ -22,6 +22,7 @@ archive.zip
 .env
 alembic.ini
 media/
+db
 # vim temporary files
 *~
 .*.sw?
