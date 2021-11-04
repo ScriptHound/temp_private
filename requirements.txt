@@ -1,0 +1,13 @@
+fastapi
+python-dotenv
+pymysql
+pillow
+pytest
+aiomysql
+sqlalchemy
+alembic
+aiofiles
+python-multipart
+gunicorn
+uvicorn
+cryptography
