@@ -31,4 +31,17 @@ Run tests if needed (requires python venv)
 ```
 make run_tests
 ```
- 
+
+If you want to see service in action you can use
+demonstration.py script as follows
+```
+python demonstration.py --address "127.0.0.1" --port "80"
+```
+
+Common issues:
+
+Access denied upon db/ directory
+```
+(CAUTION MIGHT BE DANGEROUS)
+sudo chmod -R a+rwx db/
+```
