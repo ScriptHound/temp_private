@@ -20,6 +20,7 @@ venv
 docs.zip
 archive.zip
 .env
+.env_bak
 alembic.ini
 media/
 db
