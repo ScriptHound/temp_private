@@ -21,6 +21,19 @@ Start service with Docker
 docker-compose up --build
 ```
 
+Don't forget to run migrations against db:
+at docker backend container
+```
+docker exec -it <container name> bash
+alembic upgrade head
+```
+or outside docker container
+
+```
+alembic upgrade head
+```
+
+
 If you like tmux sessions or just want to launch server with no container
 just run make:
 ```
