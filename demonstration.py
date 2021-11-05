@@ -7,6 +7,7 @@ def upload_image(address, port):
     image = open("test_data/test_image.jpg", 'rb')
     response = requests.post(
         f"http://{address}:{port}/upload", files={"image": image.read()})
+    print(response.json())
     return response
 
 
