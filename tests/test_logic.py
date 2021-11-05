@@ -1,6 +1,6 @@
 from PIL import Image
 
-from main_app.logic import scale_image
+from main_app.logic import scale_image, image_difference
 
 
 def test_scale_image():
@@ -22,3 +22,27 @@ def test_scale_image():
         is_width_scaled = scaled_image_width == expected_width
 
         assert is_height_scaled or is_width_scaled
+
+
+def test_image_similarity():
+    """
+    Test the image_similarity function
+    """
+    original_image = Image.open("test_data/test_scale.jpg")
+    image_2 = Image.open("test_data/test_scale.jpg")
+
+    similarity = image_difference(original_image, image_2)
+
+    assert similarity == 0
+
+
+def test_image_similarity_different():
+    """
+    Test the image_similarity function
+    """
+    original_image = Image.open("test_data/test_scale.jpg")
+    image_2 = Image.open("test_data/return_test.jpg")
+
+    similarity = image_difference(original_image, image_2)
+
+    assert similarity > 0

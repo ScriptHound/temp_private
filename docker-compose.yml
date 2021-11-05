@@ -10,7 +10,7 @@ services:
   db:
     image: mysql
     expose:
-      - "3306:3306"
+      - "3306"
     cap_add:
       - SYS_NICE
     environment:

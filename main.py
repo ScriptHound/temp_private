@@ -7,8 +7,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image, UnidentifiedImageError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from main_app.logic import scale_image, create_image, get_image
-from setup import MEDIA_ROOT, engine, get_session
+from main_app.logic import (
+    scale_image,
+    create_image,
+    get_image,
+    search_similar_image) 
+from setup import MEDIA_ROOT, get_session
 
 app = FastAPI()
 
@@ -28,11 +32,14 @@ async def upload(
         image: UploadFile = File(...),
         session: AsyncSession = Depends(get_session)):
     try:
-        unique_id = await create_image(session=session, directory=MEDIA_ROOT)
         image = image.file
         image = Image.open(image)
+        _, uuid = await search_similar_image(image, session)
+        if uuid is not None:
+            return {"pic_id": uuid}
+
+        unique_id = await create_image(session=session, directory=MEDIA_ROOT)
         image.save(f"{MEDIA_ROOT}/{unique_id}.jpg")
-        await engine.dispose()
         return {"pic_id": unique_id}
     except UnidentifiedImageError:
         await session.rollback()
